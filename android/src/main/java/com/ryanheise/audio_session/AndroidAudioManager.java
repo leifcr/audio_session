@@ -267,8 +267,11 @@ public class AndroidAudioManager implements MethodCallHandler {
             return result;
         }
 
+        
+        @SuppressLint("NewApi")
         private static Map<String, Object> encodeAudioDevice(AudioDeviceInfo device) {
-            return mapOf(
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+               return mapOf(
                 "id", device.getId(),
                 "productName", device.getProductName(),
                 "address", device.getAddress(),
@@ -281,6 +284,21 @@ public class AndroidAudioManager implements MethodCallHandler {
                 "encodings", device.getEncodings(),
                 "type", device.getType()
             );
+            } else {  // Available since API level 23 (Android 6.0)
+              return mapOf(
+                "id", device.getId(),
+                "productName", device.getProductName(),
+                "isSource", device.isSource(),
+                "isSink", device.isSink(),
+                "sampleRates", device.getSampleRates(),
+                "channelMasks", device.getChannelMasks(),
+                "channelIndexMasks", device.getChannelIndexMasks(),
+                "channelCounts", device.getChannelCounts(),
+                "encodings", device.getEncodings(),
+                "type", device.getType()
+            );
+            }
+            
         }
 
         public Singleton(Context applicationContext) {
@@ -569,6 +587,7 @@ public class AndroidAudioManager implements MethodCallHandler {
                     "description", microphone.getDescription(),
                     "id", microphone.getId(),
                     "type", microphone.getType(),
+                     @SuppressLint("NewApi"）
                     "address", microphone.getAddress(),
                     "location", microphone.getLocation(),
                     "group", microphone.getGroup(),
