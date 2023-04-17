@@ -414,6 +414,7 @@ public class AndroidAudioManager implements MethodCallHandler {
         private Object getStreamMaxVolume(int streamType) {
             return audioManager.getStreamMaxVolume(streamType);
         }
+        @SuppressLint("NewApi")
         private Object getStreamMinVolume(int streamType) {
             requireApi(28);
             return audioManager.getStreamMinVolume(streamType);
