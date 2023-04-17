@@ -544,6 +544,7 @@ public class AndroidAudioManager implements MethodCallHandler {
             requireApi(17);
             return audioManager.getProperty(arg);
         }
+        
         private Object getDevices(int flags) {
             requireApi(23);
             ArrayList<Map<String, Object>> result = new ArrayList<>();
@@ -570,6 +571,8 @@ public class AndroidAudioManager implements MethodCallHandler {
             }
             return result;
         }
+        
+        @SuppressLint("NewApi")
         private Object getMicrophones() throws IOException {
             requireApi(28);
             ArrayList<Map<String, Object>> result = new ArrayList<>();
@@ -583,12 +586,15 @@ public class AndroidAudioManager implements MethodCallHandler {
                 for (Pair<Integer, Integer> pair : microphone.getChannelMapping()) {
                     channelMapping.add(new ArrayList<Integer>(Arrays.asList(pair.first, pair.second)));
                 }
+                String address = null;
+                if (Build.VERSION.SDK_INT >= 31) {
+                    microphone = microphone.getAddress();
+                }
                 result.add(mapOf(
                     "description", microphone.getDescription(),
                     "id", microphone.getId(),
                     "type", microphone.getType(),
-                     @SuppressLint("NewApi"）
-                    "address", microphone.getAddress(),
+                    "address", address,
                     "location", microphone.getLocation(),
                     "group", microphone.getGroup(),
                     "indexInTheGroup", microphone.getIndexInTheGroup(),
