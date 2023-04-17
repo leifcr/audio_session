@@ -422,6 +422,7 @@ public class AndroidAudioManager implements MethodCallHandler {
         private Object getStreamVolume(int streamType) {
             return audioManager.getStreamVolume(streamType);
         }
+        @SuppressLint("NewApi")
         private Object getStreamVolumeDb(int streamType, int index, int deviceType) {
             requireApi(28);
             return audioManager.getStreamVolumeDb(streamType, index, deviceType);
@@ -438,6 +439,7 @@ public class AndroidAudioManager implements MethodCallHandler {
             requireApi(23);
             return audioManager.isStreamMute(streamType);
         }
+        @SuppressLint("NewApi")
         private List<Map<String, Object>> getAvailableCommunicationDevices() {
             requireApi(31);
             devices = audioManager.getAvailableCommunicationDevices();
@@ -447,6 +449,7 @@ public class AndroidAudioManager implements MethodCallHandler {
             }
             return result;
         }
+        @SuppressLint("NewApi")
         private boolean setCommunicationDevice(Integer deviceId) {
             requireApi(31);
             for (AudioDeviceInfo device : devices) {
@@ -456,10 +459,12 @@ public class AndroidAudioManager implements MethodCallHandler {
             }
             return false;
         }
+        @SuppressLint("NewApi")
         private Map<String, Object> getCommunicationDevice() {
             requireApi(31);
             return encodeAudioDevice(audioManager.getCommunicationDevice());
         }
+        @SuppressLint("NewApi")
         private Object clearCommunicationDevice() {
             requireApi(31);
             audioManager.clearCommunicationDevice();
@@ -472,11 +477,13 @@ public class AndroidAudioManager implements MethodCallHandler {
         private Object isSpeakerphoneOn() {
             return audioManager.isSpeakerphoneOn();
         }
+        @SuppressLint("NewApi")
         private Object setAllowedCapturePolicy(int capturePolicy) {
             requireApi(29);
             audioManager.setAllowedCapturePolicy(capturePolicy);
             return null;
         }
+        @SuppressLint("NewApi")
         private Object getAllowedCapturePolicy() {
             requireApi(29);
             return audioManager.getAllowedCapturePolicy();
@@ -614,6 +621,7 @@ public class AndroidAudioManager implements MethodCallHandler {
             return result;
         }
 
+        @SuppressLint("NewApi")
         private Object isHapticPlaybackSupported() {
             requireApi(29);
             return audioManager.isHapticPlaybackSupported();
