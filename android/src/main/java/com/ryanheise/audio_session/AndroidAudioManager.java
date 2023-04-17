@@ -590,7 +590,7 @@ public class AndroidAudioManager implements MethodCallHandler {
                 }
                 String address = null;
                 if (Build.VERSION.SDK_INT >= 28) {
-                    microphone = microphone.getAddress();
+                    address = microphone.getAddress();
                 }
                 result.add(mapOf(
                     "description", microphone.getDescription(),
