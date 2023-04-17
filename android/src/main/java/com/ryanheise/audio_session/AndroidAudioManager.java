@@ -587,7 +587,7 @@ public class AndroidAudioManager implements MethodCallHandler {
                     channelMapping.add(new ArrayList<Integer>(Arrays.asList(pair.first, pair.second)));
                 }
                 String address = null;
-                if (Build.VERSION.SDK_INT >= 31) {
+                if (Build.VERSION.SDK_INT >= 28) {
                     microphone = microphone.getAddress();
                 }
                 result.add(mapOf(
